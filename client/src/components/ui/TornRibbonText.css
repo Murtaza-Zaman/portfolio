@@ -1,0 +1,286 @@
+/* ─── TornRibbonText — Reusable Editorial Display Typography ──────── */
+
+/*
+ * DESIGN ANATOMY:
+ * 1. Base Layer (bottom)  : Full white uppercase League Gothic typography.
+ * 2. Paper Edge Layer     : Pure white backing with slightly expanded torn polygon,
+ *                           creating the authentic frayed ripped-paper fiber border.
+ * 3. Ribbon Layer (top)   : Dark paper body (black/navy) with exact torn polygon,
+ *                           displaying contrasting red/cyan typography pixel-perfectly.
+ * 4. Script & Year Tags   : Casual handwritten script at top-left and edition at bottom-right.
+ */
+
+.trt-container {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+  line-height: 0.82;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Typography line styling (used identically across all layers) ────── */
+.trt-line {
+  display: block;
+  font-family: 'League Gothic', 'Arial Narrow', 'Impact', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: var(--trt-font-size, clamp(72px, 14vw, 165px));
+  line-height: 0.82;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  transform: scaleY(1.05);
+  transform-origin: top left;
+}
+
+.trt-line-2 {
+  margin-top: 0.04em;
+}
+
+/* ── Layer 1: Base Solid White Text ─────────────────────────────────── */
+.trt-layer-base {
+  position: relative;
+  z-index: 1;
+  color: var(--trt-text-color, #ffffff);
+  text-shadow:
+    0 2px 20px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(255, 255, 255, 0.08);
+}
+
+/* ── Layer 2: White Torn Paper Frayed Border ────────────────────────── */
+/* Slightly wider/taller clip-path than Layer 3 to reveal white torn paper fibers */
+.trt-layer-paper-edge {
+  position: absolute;
+  inset: -1px;
+  z-index: 2;
+  pointer-events: none;
+  background: var(--trt-paper-border-color, #ffffff);
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.7));
+  clip-path: polygon(
+    /* ── Top tear edge (slightly expanded upwards) ── */
+    0% 33.8%,
+    2.5% 33.0%,
+    4.5% 34.5%,
+    7.0% 32.2%,
+    9.5% 33.4%,
+    12.0% 31.5%,
+    14.5% 33.0%,
+    17.0% 31.0%,
+    19.5% 32.5%,
+    22.0% 30.2%,
+    25.0% 31.8%,
+    27.5% 29.8%,
+    30.0% 31.2%,
+    33.0% 29.0%,
+    35.5% 30.6%,
+    38.5% 28.5%,
+    41.5% 30.0%,
+    44.5% 28.0%,
+    47.5% 29.5%,
+    50.5% 27.2%,
+    53.5% 28.8%,
+    56.5% 26.8%,
+    59.5% 28.2%,
+    62.5% 26.0%,
+    65.5% 27.5%,
+    68.5% 25.2%,
+    71.5% 26.8%,
+    74.5% 24.8%,
+    77.5% 26.2%,
+    80.5% 24.0%,
+    83.5% 25.5%,
+    86.5% 23.5%,
+    89.5% 25.0%,
+    92.5% 22.8%,
+    95.5% 24.5%,
+    98.0% 22.5%,
+    100% 23.8%,
+    /* ── Bottom tear edge (slightly expanded downwards) ── */
+    100% 67.5%,
+    98.0% 68.8%,
+    95.5% 66.8%,
+    92.5% 69.0%,
+    89.5% 67.2%,
+    86.5% 69.5%,
+    83.5% 67.8%,
+    80.5% 70.0%,
+    77.5% 68.2%,
+    74.5% 70.8%,
+    71.5% 68.8%,
+    68.5% 71.5%,
+    65.5% 69.5%,
+    62.5% 72.2%,
+    59.5% 70.2%,
+    56.5% 73.0%,
+    53.5% 71.0%,
+    50.5% 73.8%,
+    47.5% 71.8%,
+    44.5% 74.5%,
+    41.5% 72.5%,
+    38.5% 75.2%,
+    35.5% 73.2%,
+    33.0% 76.0%,
+    30.0% 74.0%,
+    27.5% 76.8%,
+    25.0% 74.8%,
+    22.0% 77.5%,
+    19.5% 75.5%,
+    17.0% 78.2%,
+    14.5% 76.2%,
+    12.0% 78.8%,
+    9.5% 77.0%,
+    7.0% 79.5%,
+    4.5% 77.8%,
+    2.5% 80.2%,
+    0% 78.5%
+  );
+}
+
+/* ── Layer 3: Main Ribbon Layer + Contrasting Text ──────────────────── */
+.trt-layer-ribbon {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: var(--trt-ribbon-bg, #060913);
+  clip-path: polygon(
+    /* ── Top tear edge (core cut) ── */
+    0% 35.5%,
+    2.5% 34.8%,
+    4.5% 36.0%,
+    7.0% 34.0%,
+    9.5% 35.1%,
+    12.0% 33.2%,
+    14.5% 34.6%,
+    17.0% 32.8%,
+    19.5% 34.1%,
+    22.0% 32.0%,
+    25.0% 33.4%,
+    27.5% 31.6%,
+    30.0% 32.8%,
+    33.0% 30.8%,
+    35.5% 32.2%,
+    38.5% 30.2%,
+    41.5% 31.6%,
+    44.5% 29.8%,
+    47.5% 31.1%,
+    50.5% 29.0%,
+    53.5% 30.4%,
+    56.5% 28.5%,
+    59.5% 29.8%,
+    62.5% 27.8%,
+    65.5% 29.1%,
+    68.5% 27.0%,
+    71.5% 28.4%,
+    74.5% 26.5%,
+    77.5% 27.8%,
+    80.5% 25.8%,
+    83.5% 27.1%,
+    86.5% 25.2%,
+    89.5% 26.6%,
+    92.5% 24.6%,
+    95.5% 26.0%,
+    98.0% 24.2%,
+    100% 25.5%,
+    /* ── Bottom tear edge (core cut) ── */
+    100% 65.5%,
+    98.0% 66.8%,
+    95.5% 65.0%,
+    92.5% 67.0%,
+    89.5% 65.3%,
+    86.5% 67.5%,
+    83.5% 66.0%,
+    80.5% 68.0%,
+    77.5% 66.3%,
+    74.5% 68.8%,
+    71.5% 67.0%,
+    68.5% 69.5%,
+    65.5% 67.8%,
+    62.5% 70.2%,
+    59.5% 68.5%,
+    56.5% 71.0%,
+    53.5% 69.3%,
+    50.5% 71.8%,
+    47.5% 70.0%,
+    44.5% 72.5%,
+    41.5% 70.8%,
+    38.5% 73.2%,
+    35.5% 71.5%,
+    33.0% 74.0%,
+    30.0% 72.3%,
+    27.5% 74.8%,
+    25.0% 73.0%,
+    22.0% 75.5%,
+    19.5% 73.8%,
+    17.0% 76.2%,
+    14.5% 74.5%,
+    12.0% 76.8%,
+    9.5% 75.2%,
+    7.0% 77.5%,
+    4.5% 76.0%,
+    2.5% 78.2%,
+    0% 76.5%
+  );
+}
+
+.trt-ribbon-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.trt-ribbon-content .trt-line {
+  color: var(--trt-ribbon-text-color, #ff253a);
+  text-shadow:
+    0 0 20px var(--trt-glow-color, rgba(255, 37, 58, 0.45)),
+    0 0 50px var(--trt-glow-color, rgba(255, 37, 58, 0.2));
+}
+
+/* ── Casual Handwritten Script Tag (top-left) ───────────────────────── */
+.trt-script-tag {
+  position: absolute;
+  top: -0.34em;
+  left: 0.05em;
+  z-index: 5;
+  pointer-events: none;
+  font-family: 'Caveat', 'Brush Script MT', 'Segoe Script', cursive;
+  font-size: clamp(22px, 3.5vw, 42px);
+  font-weight: 700;
+  color: #ffffff;
+  transform: rotate(-6deg);
+  text-transform: none;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.9),
+    0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* ── Edition / Year Tag (bottom-right) ───────────────────────────────── */
+.trt-year-tag {
+  position: absolute;
+  bottom: -0.16em;
+  right: 0.08em;
+  z-index: 5;
+  pointer-events: none;
+  font-family: 'League Gothic', 'Impact', sans-serif;
+  font-size: clamp(26px, 4vw, 50px);
+  font-weight: 400;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.9),
+    0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+/* ── Reduced motion accessibility ────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .trt-layer-paper-edge,
+  .trt-layer-ribbon {
+    filter: none !important;
+  }
+}

@@ -1,0 +1,15 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "npm install": true,
+        "npm run check": true,
+        "/^node --input-type=module -e \"import \\{ app \\} from '\\./src/app\\.js'; const server = app\\.listen\\(0, async \\(\\) => \\{ const \\{ port \\} = server\\.address\\(\\); const base = 'http://127\\.0\\.0\\.1:' \\+ port \\+ '/api/v1'; const health = await fetch\\(base \\+ '/health'\\); const navigation = await fetch\\(base \\+ '/navigation'\\); const invalidInquiry = await fetch\\(base \\+ '/inquiries', \\{ method: 'POST', headers: \\{ 'content-type': 'application/json' \\}, body: JSON\\.stringify\\(\\{\\}\\) \\}\\); console\\.log\\(JSON\\.stringify\\(\\{ health: health\\.status, navigation: navigation\\.status, invalidInquiry: invalidInquiry\\.status \\}\\)\\); server\\.close\\(\\); \\}\\);\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "npm audit": true,
+        "/^npm run check:release; node -e \"JSON\\.parse\\(require\\('fs'\\)\\.readFileSync\\('vercel\\.json', 'utf8'\\)\\); console\\.log\\('vercel\\.json valid'\\)\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

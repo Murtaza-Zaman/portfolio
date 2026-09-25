@@ -1,0 +1,24 @@
+# Excluded project files requested by user
+PROJECT_MASTER_CONTEXT.md
+project_master_context.md
+technical-architecture/
+technical-architecture
+technical architecture/
+techinical architecture/
+imp.txt
+
+# Dependencies & Build artifacts
+node_modules/
+dist/
+build/
+.vite/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs & OS Files
+*.log
+.DS_Store
+Thumbs.db
