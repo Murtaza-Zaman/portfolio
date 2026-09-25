@@ -17,12 +17,14 @@ Object.defineProperty(window, "matchMedia", {
   }),
 });
 
-/* global global */
 const rafMock = (cb) => setTimeout(cb, 16);
 const cafMock = (id) => clearTimeout(id);
 
+global.requestAnimationFrame = rafMock;
+global.cancelAnimationFrame = cafMock;
 globalThis.requestAnimationFrame = rafMock;
 globalThis.cancelAnimationFrame = cafMock;
+
 if (typeof window !== "undefined") {
   window.requestAnimationFrame = rafMock;
   window.cancelAnimationFrame = cafMock;
@@ -30,12 +32,10 @@ if (typeof window !== "undefined") {
     globalThis.getComputedStyle = window.getComputedStyle.bind(window);
   }
 }
-if (typeof global !== "undefined") {
-  global.requestAnimationFrame = rafMock;
-  global.cancelAnimationFrame = cafMock;
-}
+
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.disable(false, true);
+gsap.ticker.sleep();
 
 afterEach(() => {
   try {

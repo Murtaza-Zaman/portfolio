@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { SocialGlowButton, getSocialIcon } from "./SocialGlowButton";
+import { SocialGlowButton } from "./SocialGlowButton";
+import { getSocialIcon } from "../../utils/socialUtils.js";
 import { Github, Linkedin, Twitter, MessageCircle } from "lucide-react";
 
 describe("SocialGlowButton Component", () => {

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Terminal, Database, Sparkles, Cloud } from "lucide-react";
 import { TextReveal } from "../../../components/animations/TextReveal";
 
 const DEFAULT_STAGES = [
@@ -7,33 +6,27 @@ const DEFAULT_STAGES = [
     id: "fe",
     label: "Frontend Engineering",
     desc: "Vercel aesthetics · 60fps micro-interactions · React 19",
-    icon: Terminal,
     tag: "UI & INTERACTION",
   },
   {
     id: "be",
     label: "Backend Architecture",
     desc: "Node.js · Distributed APIs · High-throughput pipelines",
-    icon: Database,
     tag: "SERVICES & DATA",
   },
   {
     id: "cloud",
     label: "Cloud Systems",
     desc: "Docker containerization · Redis caching · 99.9% Uptime",
-    icon: Cloud,
     tag: "INFRASTRUCTURE",
   },
   {
     id: "ai",
     label: "Artificial Intelligence",
     desc: "LLM agents · RAG pipelines · Autonomous workflows",
-    icon: Sparkles,
     tag: "INTELLIGENT SYSTEMS",
   },
 ];
-
-const ICONS = [Terminal, Database, Cloud, Sparkles];
 
 export function EngineeringEvolutionNode({ data }) {
   const [activeStage, setActiveStage] = useState(3);
@@ -49,7 +42,6 @@ export function EngineeringEvolutionNode({ data }) {
         id: `item-${idx}`,
         label: item.label,
         desc: item.description,
-        icon: ICONS[idx % ICONS.length],
         tag: item.tag,
       }))
     : DEFAULT_STAGES;
@@ -83,7 +75,6 @@ export function EngineeringEvolutionNode({ data }) {
 
           {stages.map((stage, idx) => {
             const isActive = activeStage === idx;
-            const Icon = stage.icon;
             return (
               <div
                 key={stage.id}

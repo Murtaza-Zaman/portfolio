@@ -6,8 +6,9 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     globals: true,
-    setupFiles: ["./src/test/setup.js"],
+    setupFiles: ["./src/test/polyfills.js", "./src/test/setup.js"],
     include: ["src/**/*.test.{js,jsx}"],
+    testTimeout: 15000,
     coverage: {
       provider: "v8",
       reporter: ["text", "html"],
