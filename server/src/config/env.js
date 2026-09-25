@@ -9,7 +9,7 @@ if (Number.isNaN(port)) {
 export const env = {
   nodeEnv: process.env.NODE_ENV ?? "development",
   port,
-  mongoUri: process.env.MONGO_URI ?? "mongodb://127.0.0.1:27017/murtaza-portfolio",
+  mongoUri: process.env.MONGO_URI ?? process.env.MONGODB_URI ?? process.env.DATABASE_URL ?? "mongodb://127.0.0.1:27017/murtaza-portfolio",
   clientOrigin: process.env.CLIENT_ORIGIN ?? "http://localhost:5173",
   publicSiteUrl: process.env.PUBLIC_SITE_URL ?? "http://localhost:5173",
   jwtSecret: process.env.JWT_SECRET ?? "murtaza-portfolio-jwt-super-secret-key-2026",

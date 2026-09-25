@@ -21,8 +21,10 @@ export async function connectDatabase() {
   if (mongoose.connection.readyState === 1) {
     return mongoose.connection;
   }
+  const maskedUri = env.mongoUri.replace(/\/\/([^:]+):([^@]+)@/, "//$1:****@");
+  console.log(`Connecting to MongoDB at: ${maskedUri}`);
   return mongoose.connect(env.mongoUri, {
-    serverSelectionTimeoutMS: 5000,
+    serverSelectionTimeoutMS: 10000,
   });
 }
 
