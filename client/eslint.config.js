@@ -36,4 +36,13 @@ export default [
       ],
     },
   },
+  {
+    files: ["src/test/**/*.{js,jsx}", "**/*.test.{js,jsx}"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
+  },
 ];
