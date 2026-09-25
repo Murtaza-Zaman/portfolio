@@ -1,0 +1,13 @@
+{
+  "name": "portfolio-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "start": "npm --prefix server start",
+    "postinstall": "npm --prefix server install"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
