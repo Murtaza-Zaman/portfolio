@@ -20,8 +20,6 @@ Object.defineProperty(window, "matchMedia", {
 const rafMock = (cb) => setTimeout(cb, 16);
 const cafMock = (id) => clearTimeout(id);
 
-global.requestAnimationFrame = rafMock;
-global.cancelAnimationFrame = cafMock;
 globalThis.requestAnimationFrame = rafMock;
 globalThis.cancelAnimationFrame = cafMock;
 
