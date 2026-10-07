@@ -59,15 +59,13 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
         {/* Logo mark */}
         <Link
+          aria-label="Home"
           className="group flex items-center gap-2.5"
           to={ROUTES.PUBLIC.HOME}
         >
           {/* Monogram */}
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-white border border-white/20 font-mono text-sm font-bold tracking-tighter group-hover:border-cyan-500/40 transition-all duration-300">
-            mz
-          </span>
-          <span className="font-display text-sm font-semibold tracking-tight text-white transition-colors duration-300">
-            Murtaza Zaman
+            kz
           </span>
         </Link>
 

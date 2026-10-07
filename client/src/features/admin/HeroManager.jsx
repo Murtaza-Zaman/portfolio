@@ -77,13 +77,13 @@ const DEFAULT_PHILOSOPHY_STEPS = [
 ];
 
 const DEFAULT_HERO_STATE = {
-  name: "Murtaza Zaman",
+  name: "Kebria Zaman",
   title: "Future Technology Builder",
-  slug: "murtaza-zaman",
+  slug: "kebria-zaman",
   badgeText: "Available for Projects",
   badgeActive: true,
   scriptTag: "Full-Stack Engineer",
-  nameLine1: "MURTAZA",
+  nameLine1: "KEBRIA",
   nameLine2: "ZAMAN",
   rolePrefix: "Future Technology Builder",
   roleSkills: [
@@ -408,7 +408,7 @@ export function HeroManager() {
             <div className="grid gap-4 sm:grid-cols-2">
               <Input
                 label="Name Display (Line 1)"
-                placeholder="e.g. MURTAZA"
+                placeholder="e.g. KEBRIA"
                 value={formState.nameLine1}
                 onChange={(e) => handleChange("nameLine1", e.target.value)}
               />

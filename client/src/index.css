@@ -4,7 +4,6 @@
 @import "@fontsource/geist/600.css";
 @import "@fontsource/geist/700.css";
 @import "@fontsource/geist-mono/400.css";
-@import "@fontsource/geist-mono/500.css";
 
 @import "./design-system/tokens.css";
 
@@ -112,7 +111,6 @@
 
   .split-char, .split-word {
     display: inline-block;
-    will-change: transform, opacity, filter;
     backface-visibility: hidden;
   }
 
@@ -135,7 +133,6 @@
   .tilt-card {
     transform-style: preserve-3d;
     transition: transform 0.1s ease-out, box-shadow 0.3s ease;
-    will-change: transform;
   }
 
   .tilt-card:hover {
@@ -324,7 +321,6 @@
 
 /* ─── GSAP / Motion ─────────────────────────────────────────────────── */
 .gsap-reveal {
-  will-change: transform, opacity;
 }
 
 [data-magnetic] {

@@ -103,7 +103,7 @@ export function ServicesPage() {
       </section>
 
       {/* Services grid */}
-      <div className="mx-auto max-w-6xl px-6 py-16 lg:px-8 space-y-12">
+      <div className="mx-auto max-w-6xl px-6 pt-10 pb-8 lg:px-8 space-y-12">
         {query.isLoading ? (
           <ContentState isLoading />
         ) : query.error ? (

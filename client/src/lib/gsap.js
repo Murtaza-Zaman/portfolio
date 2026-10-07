@@ -9,20 +9,59 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TextPlugin } from "gsap/TextPlugin";
 import { Flip } from "gsap/Flip";
 
-// Register all plugins
-gsap.registerPlugin(ScrollTrigger, TextPlugin, Flip);
+let initialized = false;
 
-// Global defaults — only transform + opacity animated for perf
-gsap.defaults({
-  ease: "power3.out",
-  duration: 0.7,
+export function ensureGSAP() {
+  if (initialized) return;
+  initialized = true;
+
+  gsap.registerPlugin(ScrollTrigger, TextPlugin, Flip);
+
+  gsap.defaults({
+    ease: "power3.out",
+    duration: 0.7,
+  });
+
+  if (typeof window !== "undefined" && window.matchMedia) {
+    const mm = gsap.matchMedia();
+    mm.add("(prefers-reduced-motion: reduce)", () => {
+      gsap.globalTimeline.timeScale(100);
+    });
+  }
+}
+
+// Transparent Proxy to auto-initialize plugins on first access
+const gsapProxy = new Proxy(gsap, {
+  get(target, prop, receiver) {
+    if (!initialized) {
+      ensureGSAP();
+    }
+    const val = Reflect.get(target, prop, receiver);
+    if (typeof val === "function") {
+      return val.bind(target);
+    }
+    return val;
+  },
+  apply(target, thisArg, argArray) {
+    if (!initialized) {
+      ensureGSAP();
+    }
+    return Reflect.apply(target, thisArg, argArray);
+  },
 });
 
-// Reduced-motion override: shrink every animation if user prefers
-const mm = gsap.matchMedia();
-mm.add("(prefers-reduced-motion: reduce)", () => {
-  gsap.globalTimeline.timeScale(100); // effectively instant
+const scrollTriggerProxy = new Proxy(ScrollTrigger, {
+  get(target, prop, receiver) {
+    if (!initialized) {
+      ensureGSAP();
+    }
+    const val = Reflect.get(target, prop, receiver);
+    if (typeof val === "function") {
+      return val.bind(target);
+    }
+    return val;
+  },
 });
 
-export { gsap, ScrollTrigger, TextPlugin, Flip };
-export default gsap;
+export { gsapProxy as gsap, scrollTriggerProxy as ScrollTrigger, TextPlugin, Flip };
+export default gsapProxy;

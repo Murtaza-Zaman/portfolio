@@ -105,7 +105,7 @@ export function ContactPage() {
       </section>
 
       {/* Main content area */}
-      <div className="mx-auto max-w-6xl px-6 py-16 lg:px-8">
+      <div className="mx-auto max-w-6xl px-6 pt-10 pb-8 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
           {/* Left panel: Info & Process */}
           <div ref={infoRef} style={{ opacity: 0 }} className="space-y-6">

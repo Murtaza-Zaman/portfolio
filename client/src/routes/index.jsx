@@ -1,6 +1,11 @@
 import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 
+// Eager-import landing page components — they're always needed on first load.
+// Lazy-loading them adds an extra network round-trip to the LCP critical path.
+import { HomePage } from "../features/home/HomePage";
+import { PublicLayout } from "../layouts/PublicLayout";
+
 const page = (loader, exportName) => lazy(() => loader().then((module) => ({ default: module[exportName] })));
 
 const AboutPage = page(() => import("../features/about/AboutPage"), "AboutPage");
@@ -11,14 +16,12 @@ const SettingsPage = page(() => import("../features/settings/SettingsPage"), "Se
 const LoginPage = page(() => import("../features/auth/LoginPage"), "LoginPage");
 const ProtectedRoute = page(() => import("../features/auth/ProtectedRoute"), "ProtectedRoute");
 const ContactPage = page(() => import("../features/contact/ContactPage"), "ContactPage");
-const HomePage = page(() => import("../features/home/HomePage"), "HomePage");
 const NotFoundPage = page(() => import("../features/home/NotFoundPage"), "NotFoundPage");
 const ProjectDetailPage = page(() => import("../features/projects/ProjectDetailPage"), "ProjectDetailPage");
 const ProjectsPage = page(() => import("../features/projects/ProjectsPage"), "ProjectsPage");
 const ServiceDetailPage = page(() => import("../features/services/ServiceDetailPage"), "ServiceDetailPage");
 const ServicesPage = page(() => import("../features/services/ServicesPage"), "ServicesPage");
 const AdminLayout = page(() => import("../layouts/AdminLayout"), "AdminLayout");
-const PublicLayout = page(() => import("../layouts/PublicLayout"), "PublicLayout");
 
 export function AppRouter() {
   return (

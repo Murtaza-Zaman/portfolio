@@ -15,7 +15,7 @@ export function ResumePage() {
   ]);
 
   return (
-    <div className="mx-auto max-w-4xl space-y-10 px-6 py-16 lg:px-8">
+    <div className="mx-auto max-w-4xl space-y-10 px-6 pt-16 pb-8 lg:px-8">
       <Seo
         canonicalPath="/resume"
         description="Professional resume, qualifications, and engineering experience for Murtaza Zaman."

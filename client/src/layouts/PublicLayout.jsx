@@ -9,8 +9,6 @@
 
 import { Outlet } from "react-router-dom";
 
-// Initialize GSAP plugins ONCE at module load time
-import "../lib/gsap";
 
 import { AICursor } from "../components/Cursor";
 import { SentientUniverseBackground } from "../components/Background";

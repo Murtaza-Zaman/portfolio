@@ -14,13 +14,13 @@
 
 import { memo, useEffect, useRef } from "react";
 
-// Canvas System Constants
-const PARTICLE_COUNT_DESKTOP = 70;
-const PARTICLE_COUNT_MOBILE = 35;
-const MAX_CONNECTION_DIST = 140;
-const CURSOR_INTERACTION_RADIUS = 200;
-const DATA_STREAM_COUNT = 10;
-const HUB_COUNT = 5;
+// Canvas System Constants — optimized for 60fps & low TBT
+const PARTICLE_COUNT_DESKTOP = 40;
+const PARTICLE_COUNT_MOBILE = 20;
+const MAX_CONNECTION_DIST = 100;
+const CURSOR_INTERACTION_RADIUS = 180;
+const DATA_STREAM_COUNT = 8;
+const HUB_COUNT = 4;
 
 export const NeuralUniverseCanvas = memo(function NeuralUniverseCanvas() {
   const canvasRef = useRef(null);
@@ -29,11 +29,21 @@ export const NeuralUniverseCanvas = memo(function NeuralUniverseCanvas() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext("2d", { alpha: true });
-    if (!ctx) return;
+    let cleanup = null;
+    let cancelled = false;
 
-    let animFrameId = null;
-    let isRunning = true;
+    const initTimer =
+      typeof window !== "undefined" && "requestIdleCallback" in window
+        ? window.requestIdleCallback(startCanvas, { timeout: 1200 })
+        : setTimeout(startCanvas, 100);
+
+    function startCanvas() {
+      if (cancelled || !canvasRef.current) return;
+      const ctx = canvas.getContext("2d", { alpha: true });
+      if (!ctx) return;
+
+      let animFrameId = null;
+      let isRunning = true;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
     let dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -533,7 +543,30 @@ export const NeuralUniverseCanvas = memo(function NeuralUniverseCanvas() {
     };
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
-    return () => {
+    // ── IntersectionObserver: Pause when scrolled offscreen ────────
+    const observer =
+      typeof IntersectionObserver !== "undefined"
+        ? new IntersectionObserver(
+            ([entry]) => {
+              if (entry.isIntersecting) {
+                if (!isRunning) {
+                  isRunning = true;
+                  animFrameId = requestAnimationFrame(render);
+                }
+              } else {
+                isRunning = false;
+                if (animFrameId) cancelAnimationFrame(animFrameId);
+              }
+            },
+            { threshold: 0 }
+          )
+        : null;
+
+    if (observer) {
+      observer.observe(canvas);
+    }
+
+    cleanup = () => {
       isRunning = false;
       if (animFrameId) cancelAnimationFrame(animFrameId);
       window.removeEventListener("resize", handleResize);
@@ -541,8 +574,24 @@ export const NeuralUniverseCanvas = memo(function NeuralUniverseCanvas() {
       window.removeEventListener("click", handleClick);
       document.removeEventListener("mouseleave", handlePointerLeave);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
+      if (observer) observer.disconnect();
     };
-  }, []);
+  }
+
+  return () => {
+    cancelled = true;
+    if (
+      typeof window !== "undefined" &&
+      "cancelIdleCallback" in window &&
+      typeof initTimer === "number"
+    ) {
+      window.cancelIdleCallback(initTimer);
+    } else {
+      clearTimeout(initTimer);
+    }
+    if (cleanup) cleanup();
+  };
+}, []);
 
   return (
     <canvas

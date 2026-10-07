@@ -35,7 +35,7 @@ export function SiteFooter() {
       {/* Top glow line */}
       <div className="h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
 
-      <div className="mx-auto max-w-6xl px-6 py-16 lg:px-8">
+      <div className="mx-auto max-w-6xl px-6 pt-10 pb-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[1fr_auto_auto_auto]">
 
           {/* Brand column */}
@@ -43,10 +43,10 @@ export function SiteFooter() {
             {/* Logo mark */}
             <Link className="inline-flex items-center gap-2.5 group" to={ROUTES.PUBLIC.HOME}>
               <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/[0.07] font-mono text-sm font-bold text-white border border-white/[0.1] group-hover:border-cyan-500/40 group-hover:bg-cyan-500/10 transition-all duration-300">
-                mz
+                kz
               </span>
               <span className="font-display text-base font-semibold text-white tracking-tight">
-                Murtaza Zaman
+                {profile.data?.data?.name || "Kebria Zaman"}
               </span>
             </Link>
 
@@ -122,9 +122,9 @@ export function SiteFooter() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-14 border-t border-white/[0.06] pt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 border-t border-white/[0.06] pt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-mono text-[10px] text-slate-600 tracking-wide">
-            © {new Date().getFullYear()} Murtaza Zaman — All rights reserved
+            © {new Date().getFullYear()} {profile.data?.data?.name || "Kebria Zaman"} — All rights reserved
           </p>
         </div>
       </div>

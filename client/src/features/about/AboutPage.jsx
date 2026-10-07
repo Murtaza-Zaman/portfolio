@@ -100,7 +100,7 @@ export function AboutPage() {
       </section>
 
       {/* ── Identity & Approach ────────────────────────────────── */}
-      <section className="mx-auto max-w-6xl space-y-16 px-6 py-16 lg:px-8">
+      <section className="mx-auto max-w-6xl space-y-16 px-6 pt-10 pb-8 lg:px-8">
         {profile.isLoading || profile.error ? (
           <ContentState error={profile.error} isLoading={profile.isLoading} />
         ) : (

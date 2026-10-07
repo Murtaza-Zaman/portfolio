@@ -9,13 +9,20 @@
   <title>Murtaza Zaman</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="alternate icon" href="/favicon.ico" />
-  <!-- Google Fonts: League Gothic (hero display) + Space Grotesk (headings) + Inter -->
+  <!-- Google Fonts: Only Caveat + League Gothic (others served via @fontsource locally) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=League+Gothic&family=Permanent+Marker&family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet"
-  />
+  <!-- Preconnect to API backend to save DNS+TCP+TLS on critical data fetches -->
+  <link rel="preconnect" href="https://murtaza-portfolio-7cf8b7fbf5b8.herokuapp.com" />
+  <!-- Async-load Google Fonts (non-render-blocking) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=League+Gothic&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=League+Gothic&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=League+Gothic&display=swap" /></noscript>
+  <!-- Inline critical CSS for instant hero skeleton paint -->
+  <style>
+    body { margin: 0; background: #050c1a; color: #f1f5f9; }
+    #root { min-height: 100dvh; }
+  </style>
 </head>
 
 <body>

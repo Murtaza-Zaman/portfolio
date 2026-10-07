@@ -106,7 +106,7 @@ export function HomePage() {
   const badgeText = profileData?.badgeText || "Available for Projects";
   const badgeActive = profileData?.badgeActive ?? true;
   const scriptTag = profileData?.scriptTag || "Full-Stack Engineer";
-  const nameLine1 = profileData?.nameLine1 || "MURTAZA";
+  const nameLine1 = profileData?.nameLine1 || "KEBRIA";
   const nameLine2 = profileData?.nameLine2 || "ZAMAN";
   const rolePrefix = profileData?.rolePrefix || "Future Technology Builder";
   const roleSkills = profileData?.roleSkills?.length
@@ -154,32 +154,19 @@ export function HomePage() {
     description: summaryText,
   });
 
-  // Hero entrance stagger
+  // Hero entrance stagger — fast & non-blocking for LCP
   useGSAP(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const els = [
-      heroBadgeRef.current,
-      heroH1Ref.current,
-      heroSubRef.current,
-      heroBodyRef.current,
-      heroChipsRef.current,
-      heroSocialRef.current,
-      heroCTAsRef.current,
-    ];
-
-    if (reduced) {
-      gsap.set(els, { opacity: 1, y: 0 });
-      return;
-    }
+    if (reduced) return;
 
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-    tl.fromTo(heroBadgeRef.current, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4 }, 0.0)
-      .fromTo(heroH1Ref.current,    { opacity: 0, y: 28, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.85, ease: "power4.out" }, 0.3)
-      .fromTo(heroSubRef.current,   { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 1.2)
-      .fromTo(heroBodyRef.current,  { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6 }, 1.35)
-      .fromTo(heroChipsRef.current, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5 }, 1.5)
-      .fromTo(heroSocialRef.current,{ opacity: 0, y: 12, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.5 }, 1.6)
-      .fromTo(heroCTAsRef.current,  { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5 }, 1.7);
+    tl.from(heroBadgeRef.current, { opacity: 0, y: 10, duration: 0.35 }, 0.0)
+      .from(heroH1Ref.current,    { opacity: 0.3, y: 18, scale: 0.99, duration: 0.5, ease: "power3.out" }, 0.05)
+      .from(heroSubRef.current,   { opacity: 0.3, y: 10, duration: 0.4 }, 0.15)
+      .from(heroBodyRef.current,  { opacity: 0.3, y: 10, duration: 0.4 }, 0.22)
+      .from(heroChipsRef.current, { opacity: 0.3, y: 10, duration: 0.4 }, 0.28)
+      .from(heroSocialRef.current,{ opacity: 0.3, y: 10, scale: 0.96, duration: 0.4 }, 0.34)
+      .from(heroCTAsRef.current,  { opacity: 0.3, y: 10, duration: 0.4 }, 0.4);
   }, []);
 
   // Capability rows stagger
@@ -228,7 +215,7 @@ export function HomePage() {
           {/* Left — Identity Column */}
           <div className="flex-1 space-y-8 lg:max-w-[52%]">
             {/* Availability badge */}
-            <div ref={heroBadgeRef} style={{ opacity: 0 }}>
+            <div ref={heroBadgeRef}>
               <span className="status-available">
                 {badgeActive && (
                   <span className="relative flex h-2 w-2">
@@ -241,7 +228,7 @@ export function HomePage() {
             </div>
 
             {/* Name — Torn ribbon editorial display (Tailwind CSS) */}
-            <div ref={heroH1Ref} style={{ opacity: 0 }}>
+            <div ref={heroH1Ref}>
               <TornRibbonText
                 line1={nameLine1}
                 line2={nameLine2}
@@ -258,7 +245,6 @@ export function HomePage() {
             {/* Role / specialization */}
             <div
               ref={heroSubRef}
-              style={{ opacity: 0 }}
               className="flex items-center gap-3"
             >
               <span className="h-px w-8 bg-cyan-500/50 shrink-0" />
@@ -276,7 +262,6 @@ export function HomePage() {
             {/* Positioning */}
             <p
               ref={heroBodyRef}
-              style={{ opacity: 0 }}
               className="text-lg leading-relaxed text-slate-400 max-w-xl"
             >
               {summaryText}
@@ -285,7 +270,6 @@ export function HomePage() {
             {/* Tech stack chips */}
             <div
               ref={heroChipsRef}
-              style={{ opacity: 0 }}
               className="flex flex-wrap gap-2"
             >
               {heroChips.map((chip) => (
@@ -296,7 +280,6 @@ export function HomePage() {
             {/* Glowing Social Media Badges (Directly above CTAs) */}
             <div
               ref={heroSocialRef}
-              style={{ opacity: 0 }}
               className="flex flex-wrap items-center gap-3 pt-1"
             >
               {socialLinks.map((link, idx) => (
@@ -314,7 +297,6 @@ export function HomePage() {
             {/* CTAs */}
             <div
               ref={heroCTAsRef}
-              style={{ opacity: 0 }}
               className="flex flex-wrap items-center gap-4 pt-1"
             >
               <Link
@@ -616,7 +598,7 @@ export function HomePage() {
             }}
             aria-hidden="true"
           />
-          <div className="relative mx-auto max-w-6xl px-6 py-28 lg:px-8">
+          <div className="relative mx-auto max-w-6xl px-6 pt-16 pb-6 lg:px-8">
             <div className="max-w-2xl">
               <p className="eyebrow">
                 <TextReveal as="span" variant="label">
@@ -631,7 +613,7 @@ export function HomePage() {
               <TextReveal as="p" variant="body" className="mt-6 text-lg leading-relaxed text-slate-400 max-w-xl">
                 Share your technology challenge. I&apos;ll review the requirements, assess the architecture options, and outline a practical path forward.
               </TextReveal>
-              <div className="mt-10 flex flex-wrap gap-4">
+              <div className="mt-8 flex flex-wrap gap-4">
                 <Link
                   data-magnetic
                   data-cursor="button"
@@ -653,7 +635,7 @@ export function HomePage() {
               </div>
 
               {/* Terminal decoration */}
-              <div className="mt-14 rounded-xl border border-white/[0.08] bg-white/[0.03] p-5 font-mono text-xs text-slate-500 max-w-md">
+              <div className="mt-8 rounded-xl border border-white/[0.08] bg-white/[0.03] p-5 font-mono text-xs text-slate-500 max-w-md">
                 <p className="text-cyan-500/60 mb-2 text-[10px] uppercase tracking-widest">system.init</p>
                 <p><span className="text-cyan-400">›</span> <span className="text-slate-400">define</span> your challenge</p>
                 <p><span className="text-cyan-400">›</span> <span className="text-slate-400">select</span> project scope</p>

@@ -263,7 +263,7 @@ export function ProjectsPage() {
       </div>
 
       {/* ── 3. Main Page Container ──────────────────────────────────── */}
-      <div className="relative min-h-screen bg-transparent text-slate-100 overflow-x-hidden pt-28 pb-32">
+      <div className="relative bg-transparent text-slate-100 overflow-x-hidden pt-28 pb-10">
 
         {/* Ambient Top Glow */}
         <div
